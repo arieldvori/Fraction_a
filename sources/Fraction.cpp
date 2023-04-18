@@ -7,10 +7,10 @@ ariel::Fraction::Fraction(int t, int b){
     _b=b;
 }
 
-ariel::Fraction::Fraction(float t, float b){
-    float_t=t;
-    float_b=b;
-}
+// ariel::Fraction::Fraction(float t, float b){
+//     float_t=t;
+//     float_b=b;
+// }
 
 int ariel::Fraction::gcd(int a, int b){
     while (b!=0){
