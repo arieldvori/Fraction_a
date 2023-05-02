@@ -1,152 +1,102 @@
 #pragma once
 #include <iostream>
-namespace ariel
-{
+#include <stdio.h>
+
+namespace ariel{
     class Fraction
     {
-    public:
+    private:
         int _t; // top
-        int _b; // botton
-        float float_t; // top
-        float float_b; // botton
+        int _b; // bottom
+
+    public:
+
         Fraction(int t, int b);
-        //Fraction(float t, float b);
-        int gcd(int a, int b);//returns the greatest common divisor
-        void reduse();//returns redused form
+        Fraction(float num);
+
+        // void advance();
+        // void backdown();
+        // int gcd();//returns the greatest common divisor
+        // void reduse();//redused form
+
+
+        //overload the operator + for 2 fractions. 
+        Fraction operator+(const Fraction &frac2);
+        //overload the operator - for 2 fractions. 
+        Fraction operator-(const Fraction &frac2);
+        //overload the operator * for 2 fractions. 
+        Fraction operator*(const Fraction &frac2);
+        //overload the operator / for 2 fractions. 
+        Fraction operator/(const Fraction &frac2);
+        //overload the operator == for 2 fractions. 
+        bool operator==(const Fraction &frac2);
+        //overload the operator > for 2 fractions. 
+        bool operator>(const Fraction &frac2);
+        //overload the operator < for 2 fractions. 
+        bool operator<(const Fraction &frac2);
+        //overload the operator >= for 2 fractions. 
+        bool operator>=(const Fraction &frac2);
+        //overload the operator <= for 2 fractions. 
+        bool operator<=(const Fraction &frac2);
+
+
+
+        //overload the operator + for fraction and float. 
+        Fraction operator+(const float num);
+        //overload the operator - for fraction and float. 
+        Fraction operator-(const float num);
+        //overload the operator * for fraction and float. 
+        Fraction operator*(const float num);
+        //overload the operator / for fraction and float. 
+        Fraction operator/(const float num);
+        //overload the operator == for fraction and float.
+        bool operator==(const float num);
+        //overload the operator > for fraction and float.
+        bool operator>(const float num);
+        //overload the operator < for fraction and float. 
+        bool operator<(const float num);
+        //overload the operator >= for fraction and float. 
+        bool operator>=(const float num);
+        //overload the operator <= for fraction and float. 
+        bool operator<=(const float num);
+
+
+
+        //overload the operator + for float and fraction. 
+        friend Fraction& operator+(const float num,Fraction &frac1);
+        //overload the operator - for float and fraction. 
+        friend Fraction& operator-(const float num,Fraction &frac1);
+        //overload the operator * float and fraction. 
+        friend Fraction& operator*(const float num,Fraction &frac1);
+        //overload the operator / float and fraction. 
+        friend Fraction& operator/(const float num,Fraction &frac1);
+        //overload the operator == float and fraction. 
+        friend bool operator==(const float num,Fraction &frac1);
+        //overload the operator > float and fraction. 
+        friend bool operator>(const float num,Fraction &frac1);
+        //overload the operator < float and fraction. 
+        friend bool operator<(const float num,Fraction &frac1);
+        //overload the operator >= float and fraction. 
+        friend bool operator>=(const float num,Fraction &frac1);
+        //overload the operator <= float and fraction. 
+        friend bool operator<=(const float num,Fraction &frac1);
+        
+        //overload the operator prefix ++. 
+        Fraction &operator++();
+        //overload the operator prefix --. 
+        Fraction &operator--();
+        //overload the operator postfix ++. 
+        const Fraction operator++(int);
+        //overload the operator postfix --. 
+        const Fraction operator--(int);
+
+        //overload the operator << for fraction. 
+        friend std::ostream& operator<<(std::ostream &os, const Fraction &fraction);
+        //overload the operator >>. 
+        friend std::istream& operator>>(std::istream &is, Fraction &fraction);
+
+
     };
-
-    //overload the operator + for 2 fractions. 
-    Fraction operator+(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        Fraction f((f1._t*f2._b)+(f2._t*f1._b),f1._b*f2._b);
-        f.reduse();
-        return f;
-    }
-    //overload the operator + for float and fraction. 
-    Fraction operator+(const float num,const ariel::Fraction &f1){
-        Fraction f(f1._t+(num*f1._b),f1._b);
-        return f;
-    }
-
-    //overload the operator + for fraction and float. 
-    Fraction operator+(const ariel::Fraction &f1,const float num){
-        Fraction f(f1._t+(num*f1._b),f1._b);
-        return f;
-    }
-
-    //overload the operator - for 2 fractions. 
-    Fraction operator-(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        Fraction f((f1._t*f2._b)-(f2._t*f1._b),f1._b*f2._b);
-        f.reduse();
-        return f;
-    }
-
-    //overload the operator - for float and fraction. 
-    Fraction operator-(const float num,const ariel::Fraction &f1){
-        Fraction f(f1._t-(num*f1._b),f1._b);
-        f.reduse();
-        return f;
-    }
-
-    //overload the operator - for fraction and float. 
-    Fraction operator-(const ariel::Fraction &f1,const float num){
-        Fraction f(f1._t-(num*f1._b),f1._b);
-        f.reduse();
-        return f;
-    }
-
-    //overload the operator * for 2 fractions.. 
-    Fraction operator*(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        Fraction f(f1._t*f2._t,f1._b*f2._b);
-        f.reduse();
-        return f;
-    }
-
-    // //overload the operator * for fraction and int. 
-    // Fraction operator*(const ariel::Fraction &f1,const int num){
-    //     Fraction f(f1._t*num,f1._b);
-    //     return f;
-    // }
-
-    //overload the operator * for fraction and float. 
-    Fraction operator*(const ariel::Fraction &f1,const float num){
-        Fraction f(f1._t*num,f1._b*1.0);
-        return f;
-    }
-
-    // //overload the operator * for int and fraction. 
-    // Fraction operator*(int num,const ariel::Fraction &f1){
-    //     Fraction f(f1._t*num,f1._b);
-    //     return f;
-    // }
-
-    //overload the operator * for float and fraction. 
-    Fraction operator*(const float num,const ariel::Fraction &f1){
-        Fraction f(f1._t*num,f1._b*1.0);
-        return f;
-    }
-
-    //overload the operator /. 
-    Fraction operator/(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        Fraction f(f1._t*f2._b,f1._b*f2._t);
-        f.reduse();
-        return f;
-    }
-
-    //overload the operator ==. 
-    bool operator==(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        if(f1._t==f2._t&&f1._b==f2._b){return true;}
-        else{return false;}
-    }
-
-    //overload the operator >. 
-    bool operator>(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        if(f1._t/f1._b>f2._t/f2._b&&f1._t%f1._b>f2._t%f2._b){return true;}
-        else{return false;}
-    }
-
-    //overload the operator <. 
-    bool operator<(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        if(f1._t/f1._b<f2._t/f2._b&&f1._t%f1._b<f2._t%f2._b){return true;}
-        else{return false;}
-    }
-
-    //overload the operator >=. 
-    bool operator>=(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        if(f1._t/f1._b>=f2._t/f2._b&&f1._t%f1._b>=f2._t%f2._b){return true;}
-        else{return false;}
-    }
-
-    //overload the operator <=. 
-    bool operator<=(const ariel::Fraction &f1,const ariel::Fraction &f2){
-        if(f1._t/f1._b<=f2._t/f2._b&&f1._t%f1._b<=f2._t%f2._b){return true;}
-        else{return false;}
-    }
-
-    //overload the operator ++. 
-    Fraction operator++(const ariel::Fraction &f1){
-        Fraction f(f1._t+(1*f1._b),f1._b);
-        return f;
-    }
-
-    //overload the operator --. 
-    Fraction operator--(const ariel::Fraction &f1){
-        Fraction f(f1._t-(1*f1._b),f1._b);
-        return f;
-    }
-
-    //overload the operator << for fraction. 
-    std::ostream& operator<<(std::ostream &s, const ariel::Fraction &fraction){
-        return s << fraction._t << "/" << fraction._b << std::endl;
-    }
-
-    //overload the operator >>. 
-    std::istream& operator>>(std::istream &is, ariel::Fraction &fraction){
-        is >> fraction._t >> fraction._b;
-        return is;
-    }
+}   
 
 
-
-
-
-}
